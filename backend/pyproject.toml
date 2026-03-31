@@ -1,0 +1,22 @@
+[project]
+name = "legal-docs-ai-backend"
+version = "0.1.0"
+description = "MCP tools backend for Legal Docs AI"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "python-multipart>=0.0.12",
+    "pdfplumber>=0.11.0",
+    "python-docx>=1.1.2",
+    "python-dotenv>=1.0.1",
+    "pydantic>=2.9.0",
+    "google-genai>=1.69.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

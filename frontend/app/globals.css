@@ -1,0 +1,59 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #0f172a;
+  --navy-light: #1e293b;
+  --gold: #c9a84c;
+  --gold-light: #e6c97a;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --border: #334155;
+  --radius: 10px;
+}
+
+body { background: var(--navy); color: var(--text); font-family: Georgia, "Times New Roman", serif; min-height: 100vh; }
+.main { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+.header { text-align: center; padding: 3rem 0 2rem; }
+.logo { font-size: 3rem; margin-bottom: 1rem; }
+.header h1 { font-size: 2.2rem; color: var(--gold); letter-spacing: -0.5px; margin-bottom: 0.5rem; }
+.header p { color: var(--text-muted); font-size: 1rem; }
+.powered { color: #4285f4; font-size: 0.8rem; margin-top: 0.4rem; display: block; }
+.content { display: flex; flex-direction: column; gap: 2rem; }
+.upload-zone-container { display: flex; flex-direction: column; gap: 1rem; }
+.drop-zone { border: 2px dashed var(--border); border-radius: var(--radius); padding: 3rem; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--navy-light); }
+.drop-zone:hover, .drop-zone.dragging { border-color: var(--gold); background: #1e2a3a; }
+.drop-zone.has-file { border-style: solid; border-color: var(--gold); }
+.upload-icon { font-size: 2rem; display: block; margin-bottom: 0.75rem; }
+.upload-prompt p { color: var(--text); font-size: 1rem; margin-bottom: 0.25rem; }
+.upload-prompt small { color: var(--text-muted); }
+.file-info { display: flex; align-items: center; gap: 0.75rem; justify-content: center; }
+.file-icon { font-size: 1.5rem; }
+.file-name { color: var(--gold); font-weight: bold; }
+.file-size { color: var(--text-muted); font-size: 0.85rem; }
+.domain-select { width: 100%; padding: 0.75rem 1rem; background: var(--navy-light); border: 1px solid var(--border); color: var(--text); border-radius: var(--radius); font-size: 1rem; font-family: inherit; }
+.analyze-btn { width: 100%; padding: 0.9rem; background: var(--gold); color: var(--navy); font-size: 1rem; font-weight: bold; border: none; border-radius: var(--radius); cursor: pointer; font-family: inherit; letter-spacing: 0.5px; transition: background 0.2s; }
+.analyze-btn:hover:not(:disabled) { background: var(--gold-light); }
+.analyze-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.error-msg { color: #ef4444; font-size: 0.9rem; }
+.loading { text-align: center; padding: 2rem; color: var(--text-muted); }
+.spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: #4285f4; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.verdict-bar { background: var(--navy-light); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+.verdict-label { font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; }
+.verdict-text { font-size: 1.05rem; margin: 0.5rem 0; }
+.meta-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.tag { background: var(--navy); border: 1px solid var(--border); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem; color: var(--text-muted); }
+.result-section { margin-bottom: 1.5rem; }
+.result-section h2 { font-size: 1.1rem; color: var(--gold); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+.card { background: var(--navy-light); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 0.75rem; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.risk-card .card-header strong { color: var(--navy); }
+.risk-card p { color: #1e293b; }
+.risk-card .clause { color: #475569; }
+.badge { font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 20px; color: white; text-transform: uppercase; font-weight: bold; }
+.clause { color: var(--text-muted); display: block; margin-top: 0.5rem; font-size: 0.85rem; }
+.priority { color: var(--text-muted); font-size: 0.85rem; }
+.key-terms { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.term-badge { background: var(--navy-light); border: 1px solid var(--gold); color: var(--gold); padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.85rem; }
+p { line-height: 1.7; color: var(--text); }
+small { color: var(--text-muted); font-size: 0.85rem; }
