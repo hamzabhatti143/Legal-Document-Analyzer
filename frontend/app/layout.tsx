@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Legal Docs AI",
-  description: "AI-powered legal document simplifier using Gemini",
+  title: "Document Analyzer",
+  description: "AI-powered document analysis — plain English summaries, risks, and advice.",
 };
 
 export const viewport: Viewport = {

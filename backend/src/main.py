@@ -1,6 +1,6 @@
 """
-Legal Docs AI — Python MCP Backend
-All document processing runs locally. Only structured metadata is sent to Gemini.
+Document Analyzer — Python MCP Backend
+All document processing runs locally. Only structured metadata is sent to the AI.
 """
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
@@ -15,7 +15,7 @@ from models import AnalysisResult, Metadata, Analysis
 
 load_dotenv()
 
-app = FastAPI(title="Legal Docs AI Backend", version="1.0.0")
+app = FastAPI(title="Document Analyzer Backend", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -35,7 +35,7 @@ MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "service": "Legal Docs AI Backend (MCP + Gemini)"}
+    return {"status": "ok", "service": "Document Analyzer Backend"}
 
 
 @app.post("/analyze", response_model=AnalysisResult)
