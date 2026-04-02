@@ -3,15 +3,22 @@ import { useState, useTransition } from "react";
 import { analyzeDocumentAction } from "../actions/analyze";
 import UploadZone from "./UploadZone";
 import Results from "./Results";
+import { translations, type Lang } from "../lib/translations";
 import type { AnalysisResult } from "../lib/types";
 
-export default function LegalAnalyzer() {
+interface Props {
+  lang: Lang;
+}
+
+export default function LegalAnalyzer({ lang }: Props) {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
+  const t = translations[lang];
 
   const handleSubmit = (formData: FormData) => {
     setError("");
+    formData.append("language", lang);
     startTransition(async () => {
       try {
         const data = await analyzeDocumentAction(formData);
@@ -24,14 +31,14 @@ export default function LegalAnalyzer() {
 
   return (
     <>
-      <UploadZone onSubmit={handleSubmit} isLoading={isPending} error={error} />
+      <UploadZone onSubmit={handleSubmit} isLoading={isPending} error={error} lang={lang} />
       {isPending && (
         <div className="loading">
           <div className="spinner"></div>
-          <p>Analyzing your document, please wait...</p>
+          <p>{t.analyzing}</p>
         </div>
       )}
-      {result && !isPending && <Results data={result} />}
+      {result && !isPending && <Results data={result} lang={lang} />}
     </>
   );
 }

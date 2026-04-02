@@ -14,9 +14,16 @@ if not api_key:
 
 client = genai.Client(api_key=api_key)
 
-PROMPT_TEMPLATE = """You are an expert legal document analyst.
+LANGUAGE_INSTRUCTION = {
+    "en": "Respond in English.",
+    "ur": "تمام جوابات اردو زبان میں دیں۔ summary، verdict، risks، obligations، improvements اور keyTerms سب اردو میں لکھیں۔",
+}
 
-Based on the following pre-extracted structured data from a legal document, provide a comprehensive analysis.
+PROMPT_TEMPLATE = """You are an expert document analyst.
+
+{language_instruction}
+
+Based on the following pre-extracted structured data from a document, provide a comprehensive analysis.
 The raw document text has been processed locally — only structured metadata is provided to you.
 
 === DOCUMENT METADATA ===
@@ -63,6 +70,7 @@ def analyze_with_gemini(
     clauses_found: dict[str, list[str]],
     risks: list[dict],
     text_excerpt: str,
+    language: str = "en",
 ) -> dict:
     """
     Sends ONLY structured metadata to Gemini — never the full document text.
@@ -79,6 +87,7 @@ def analyze_with_gemini(
     ) or "No major risk flags detected"
 
     prompt = PROMPT_TEMPLATE.format(
+        language_instruction=LANGUAGE_INSTRUCTION.get(language, LANGUAGE_INSTRUCTION["en"]),
         domain=domain,
         word_count=word_count,
         parties=", ".join(parties) if parties else "Not identified",

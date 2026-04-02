@@ -57,3 +57,19 @@ body { background: var(--navy); color: var(--text); font-family: Georgia, "Times
 .term-badge { background: var(--navy-light); border: 1px solid var(--gold); color: var(--gold); padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.85rem; }
 p { line-height: 1.7; color: var(--text); }
 small { color: var(--text-muted); font-size: 0.85rem; }
+
+/* Language toggle button */
+.header-top { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
+.lang-toggle { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 0.35rem 0.9rem; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+.lang-toggle:hover { background: var(--gold); color: var(--navy); }
+
+/* RTL support for Urdu */
+.rtl { direction: rtl; }
+.rtl .header { direction: rtl; }
+.rtl .header-top { justify-content: flex-start; }
+.rtl .meta-tags { direction: rtl; }
+.rtl .card-header { flex-direction: row-reverse; }
+.rtl .key-terms { direction: rtl; }
+.rtl .drop-zone { direction: rtl; }
+.rtl .domain-select { text-align: right; }
+.rtl body { font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", Georgia, serif; }
