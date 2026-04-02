@@ -15,8 +15,14 @@ if not api_key:
 client = genai.Client(api_key=api_key)
 
 LANGUAGE_INSTRUCTION = {
-    "en": "Respond in English.",
-    "ur": "تمام جوابات اردو زبان میں دیں۔ summary، verdict، risks، obligations، improvements اور keyTerms سب اردو میں لکھیں۔",
+    "en": "Respond in English. All text values in the JSON must be in English.",
+    "ur": (
+        "IMPORTANT: You MUST write ALL text values in Urdu (اردو) script. "
+        "This includes: summary, verdict, every risk title and description and clause, "
+        "every obligation party/action/deadline, every improvement issue and suggestion, "
+        "and every keyTerm. Do NOT use English for any of these values. "
+        "Only the JSON keys and severity/priority enum values (low/medium/high/critical) stay in English."
+    ),
 }
 
 PROMPT_TEMPLATE = """You are an expert document analyst.
@@ -43,22 +49,23 @@ Key Dates Found: {dates}
 
 === INSTRUCTIONS ===
 Respond ONLY with a valid JSON object — no markdown, no backticks, no explanation.
+{language_instruction}
 Use this exact structure:
 {{
   "domain": "{domain}",
   "severity": "low|medium|high|critical",
-  "summary": "Plain English summary in 3-5 sentences a non-lawyer can understand",
+  "summary": "3-5 sentence summary a non-lawyer can understand (in the required language)",
   "risks": [
-    {{ "title": "Risk title", "description": "Plain explanation", "severity": "low|medium|high|critical", "clause": "Relevant excerpt if available" }}
+    {{ "title": "Risk title (in the required language)", "description": "Plain explanation (in the required language)", "severity": "low|medium|high|critical", "clause": "Relevant excerpt if available (in the required language)" }}
   ],
   "obligations": [
-    {{ "party": "Who is obligated", "action": "What they must do", "deadline": "When if specified or null" }}
+    {{ "party": "Who is obligated (in the required language)", "action": "What they must do (in the required language)", "deadline": "When if specified or null" }}
   ],
   "improvements": [
-    {{ "issue": "Problem found", "suggestion": "Recommended fix", "priority": "low|medium|high" }}
+    {{ "issue": "Problem found (in the required language)", "suggestion": "Recommended fix (in the required language)", "priority": "low|medium|high" }}
   ],
-  "keyTerms": ["important term 1", "important term 2"],
-  "verdict": "One sentence overall assessment"
+  "keyTerms": ["important term 1 (in the required language)", "important term 2 (in the required language)"],
+  "verdict": "One sentence overall assessment (in the required language)"
 }}"""
 
 
