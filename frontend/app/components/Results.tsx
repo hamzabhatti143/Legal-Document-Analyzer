@@ -29,7 +29,7 @@ export default function Results({ data, lang }: ResultsProps) {
     <div className="results">
       <div className="verdict-bar" style={{ borderLeft: `4px solid ${severityColor[analysis.severity]}` }}>
         <span className="verdict-label" style={{ color: severityColor[analysis.severity] }}>
-          {analysis.severity.toUpperCase()} RISK
+          {t.severityLabels[analysis.severity]} {t.riskLabel}
         </span>
         <p className="verdict-text">{analysis.verdict}</p>
         <div className="meta-tags">
@@ -56,7 +56,7 @@ export default function Results({ data, lang }: ResultsProps) {
             >
               <div className="card-header">
                 <strong>{r.title}</strong>
-                <span className="badge" style={{ background: severityColor[r.severity] }}>{r.severity}</span>
+                <span className="badge" style={{ background: severityColor[r.severity] }}>{t.severityLabels[r.severity]}</span>
               </div>
               <p>{r.description}</p>
               {r.clause && <small className="clause">📌 {t.clause}: {r.clause}</small>}

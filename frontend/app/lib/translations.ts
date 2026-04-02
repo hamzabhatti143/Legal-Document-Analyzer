@@ -30,6 +30,13 @@ export const translations = {
     deadline: "Deadline",
     priority: "Priority",
     clause: "Clause",
+    riskLabel: "RISK",
+    severityLabels: {
+      low: "LOW",
+      medium: "MEDIUM",
+      high: "HIGH",
+      critical: "CRITICAL",
+    },
   },
   ur: {
     title: "دستاویز تجزیہ کار",
@@ -60,5 +67,12 @@ export const translations = {
     deadline: "آخری تاریخ",
     priority: "ترجیح",
     clause: "شق",
+    riskLabel: "خطرہ",
+    severityLabels: {
+      low: "کم",
+      medium: "درمیانہ",
+      high: "زیادہ",
+      critical: "نازک",
+    },
   },
 } as const;
