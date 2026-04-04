@@ -46,9 +46,6 @@ body { background: var(--navy); color: var(--text); font-family: Georgia, "Times
 .result-section h2 { font-size: 1.1rem; color: var(--gold); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
 .card { background: var(--navy-light); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 0.75rem; }
 .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-.risk-card .card-header strong { color: var(--navy); }
-.risk-card p { color: #1e293b; }
-.risk-card .clause { color: #475569; }
 .badge { font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 20px; color: white; text-transform: uppercase; font-weight: bold; }
 .clause { color: var(--text-muted); display: block; margin-top: 0.5rem; font-size: 0.85rem; }
 .priority { color: var(--text-muted); font-size: 0.85rem; }

@@ -15,6 +15,13 @@ const severityBg: Record<Severity, string> = {
   critical: "#450a0a",
 };
 
+const severityTextColor: Record<Severity, string> = {
+  low: "#14532d",
+  medium: "#78350f",
+  high: "#7f1d1d",
+  critical: "#fecaca",
+};
+
 interface ResultsProps {
   data: AnalysisResult;
 }
@@ -49,14 +56,14 @@ export default function Results({ data }: ResultsProps) {
             <div
               key={i}
               className="card risk-card"
-              style={{ borderLeft: `3px solid ${severityColor[r.severity]}`, background: severityBg[r.severity] }}
+              style={{ borderLeft: `3px solid ${severityColor[r.severity]}`, background: severityBg[r.severity], color: severityTextColor[r.severity] }}
             >
               <div className="card-header">
-                <strong>{r.title}</strong>
+                <strong style={{ color: severityTextColor[r.severity] }}>{r.title}</strong>
                 <span className="badge" style={{ background: severityColor[r.severity] }}>{r.severity}</span>
               </div>
-              <p>{r.description}</p>
-              {r.clause && <small className="clause">📌 Clause: {r.clause}</small>}
+              <p style={{ color: severityTextColor[r.severity] }}>{r.description}</p>
+              {r.clause && <small className="clause" style={{ color: severityTextColor[r.severity], opacity: 0.8 }}>📌 Clause: {r.clause}</small>}
             </div>
           ))}
         </section>
