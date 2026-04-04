@@ -1,12 +1,10 @@
 "use client";
 import { useState, useRef } from "react";
-import { translations, type Lang } from "../lib/translations";
 
 interface UploadZoneProps {
   onSubmit: (formData: FormData) => void;
   isLoading: boolean;
   error: string;
-  lang: Lang;
 }
 
 const ALLOWED_TYPES = [
@@ -15,20 +13,27 @@ const ALLOWED_TYPES = [
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ];
 
-const DOMAIN_KEYS = ["general", "contract", "employment", "real_estate", "ip", "corporate", "privacy"] as const;
+const DOMAINS = [
+  { value: "general", label: "General / Unknown" },
+  { value: "contract", label: "Contract" },
+  { value: "employment", label: "Employment" },
+  { value: "real_estate", label: "Real Estate" },
+  { value: "ip", label: "Intellectual Property" },
+  { value: "corporate", label: "Corporate" },
+  { value: "privacy", label: "Privacy / Data" },
+];
 
-export default function UploadZone({ onSubmit, isLoading, error, lang }: UploadZoneProps) {
+export default function UploadZone({ onSubmit, isLoading, error }: UploadZoneProps) {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [domain, setDomain] = useState("general");
   const [localError, setLocalError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
-  const t = translations[lang];
 
   const handleFile = (f: File | null | undefined) => {
     if (!f) return;
-    if (!ALLOWED_TYPES.includes(f.type)) { setLocalError(t.errorType); return; }
-    if (f.size > 10 * 1024 * 1024) { setLocalError(t.errorSize); return; }
+    if (!ALLOWED_TYPES.includes(f.type)) { setLocalError("Only PDF or DOC/DOCX files allowed."); return; }
+    if (f.size > 10 * 1024 * 1024) { setLocalError("File must be under 10MB."); return; }
     setLocalError("");
     setFile(f);
   };
@@ -68,22 +73,22 @@ export default function UploadZone({ onSubmit, isLoading, error, lang }: UploadZ
         ) : (
           <div className="upload-prompt">
             <span className="upload-icon">⬆</span>
-            <p>{t.dropZone}</p>
-            <small>{t.dropZoneHint}</small>
+            <p>Drop your document here</p>
+            <small>PDF, DOC, DOCX — max 10MB</small>
           </div>
         )}
       </div>
 
       <select className="domain-select" value={domain} onChange={(e) => setDomain(e.target.value)}>
-        {DOMAIN_KEYS.map((key) => (
-          <option key={key} value={key}>{t.domains[key]}</option>
+        {DOMAINS.map((d) => (
+          <option key={d.value} value={d.value}>{d.label}</option>
         ))}
       </select>
 
       {displayError && <p className="error-msg">{displayError}</p>}
 
       <button className="analyze-btn" onClick={handleSubmit} disabled={!file || isLoading}>
-        {isLoading ? t.analyzing : t.analyzeBtn}
+        {isLoading ? "Analyzing..." : "Analyze Document"}
       </button>
     </div>
   );

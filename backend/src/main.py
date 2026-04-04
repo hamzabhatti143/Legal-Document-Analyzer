@@ -42,7 +42,6 @@ async def health():
 async def analyze(
     file: UploadFile = File(...),
     domain: str = Form(default="general"),
-    language: str = Form(default="en"),
 ):
     # --- Validate ---
     if file.content_type not in ALLOWED_TYPES:
@@ -79,7 +78,6 @@ async def analyze(
             clauses_found=clauses_found,
             risks=risks,
             text_excerpt=text[:800],
-            language=language,
         )
 
         return AnalysisResult(

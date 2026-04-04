@@ -35,9 +35,7 @@ body { background: var(--navy); color: var(--text); font-family: Georgia, "Times
 .analyze-btn:hover:not(:disabled) { background: var(--gold-light); }
 .analyze-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .error-msg { color: #ef4444; font-size: 0.9rem; }
-.loading { text-align: center; padding: 2rem; color: var(--text-muted); }
-.lang-hint { text-align: center; padding: 1rem; color: var(--gold); font-size: 0.95rem; background: var(--navy-light); border: 1px solid var(--gold); border-radius: var(--radius); }
-.spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: #4285f4; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
+.loading { text-align: center; padding: 2rem; color: var(--text-muted); }.spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: #4285f4; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .verdict-bar { background: var(--navy-light); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
 .verdict-label { font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; }
@@ -58,19 +56,3 @@ body { background: var(--navy); color: var(--text); font-family: Georgia, "Times
 .term-badge { background: var(--navy-light); border: 1px solid var(--gold); color: var(--gold); padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.85rem; }
 p { line-height: 1.7; color: var(--text); }
 small { color: var(--text-muted); font-size: 0.85rem; }
-
-/* Language toggle button */
-.header-top { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
-.lang-toggle { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 0.35rem 0.9rem; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-family: inherit; transition: all 0.2s; }
-.lang-toggle:hover { background: var(--gold); color: var(--navy); }
-
-/* RTL support for Urdu */
-.rtl { direction: rtl; }
-.rtl .header { direction: rtl; }
-.rtl .header-top { justify-content: flex-start; }
-.rtl .meta-tags { direction: rtl; }
-.rtl .card-header { flex-direction: row-reverse; }
-.rtl .key-terms { direction: rtl; }
-.rtl .drop-zone { direction: rtl; }
-.rtl .domain-select { text-align: right; }
-.rtl body { font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", Georgia, serif; }

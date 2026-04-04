@@ -18,12 +18,9 @@ export async function analyzeDocumentAction(formData: FormData): Promise<Analysi
 
   const backendUrl = process.env.BACKEND_URL || "http://localhost:8000";
 
-  const language = (formData.get("language") as string) || "en";
-
   const backendForm = new FormData();
   backendForm.append("file", file);
   backendForm.append("domain", domain);
-  backendForm.append("language", language);
 
   const res = await fetch(`${backendUrl}/analyze`, {
     method: "POST",
