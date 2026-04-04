@@ -15,19 +15,22 @@ if not api_key:
 client = genai.Client(api_key=api_key)
 
 LANGUAGE_INSTRUCTION = {
-    "en": "Respond in English. All text values in the JSON must be in English.",
+    "en": "OUTPUT LANGUAGE: English. Write every text value in the JSON in English.",
     "ur": (
-        "IMPORTANT: You MUST write ALL text values in Urdu (اردو) script. "
-        "This includes: summary, verdict, every risk title and description and clause, "
-        "every obligation party/action/deadline, every improvement issue and suggestion, "
-        "and every keyTerm. Do NOT use English for any of these values. "
-        "Only the JSON keys and severity/priority enum values (low/medium/high/critical) stay in English."
+        "OUTPUT LANGUAGE: اردو (Urdu).\n"
+        "STRICT RULE: Every single text value you write in the JSON output MUST be in Urdu script (اردو).\n"
+        "The risk flags and clause labels below are internally-generated English labels — "
+        "you MUST translate them into Urdu in your output. Do NOT copy any English text from the input into your JSON values.\n"
+        "Affected fields: summary, verdict, risks[].title, risks[].description, risks[].clause, "
+        "obligations[].party, obligations[].action, obligations[].deadline, "
+        "improvements[].issue, improvements[].suggestion, keyTerms[].\n"
+        "ONLY these stay in English: JSON keys, and enum values (low/medium/high/critical)."
     ),
 }
 
 PROMPT_TEMPLATE = """You are an expert document analyst.
 
-{language_instruction}
+*** {language_instruction} ***
 
 Based on the following pre-extracted structured data from a document, provide a comprehensive analysis.
 The raw document text has been processed locally — only structured metadata is provided to you.
@@ -38,34 +41,34 @@ Word Count: {word_count}
 Parties Identified: {parties}
 Key Dates Found: {dates}
 
-=== CLAUSES DETECTED (locally extracted) ===
+=== CLAUSES DETECTED (locally extracted — labels are in English, translate them in your output) ===
 {clauses_summary}
 
-=== RISK FLAGS (locally scored) ===
+=== RISK FLAGS (locally scored — labels are in English, translate them in your output) ===
 {risks_summary}
 
 === SHORT DOCUMENT EXCERPT (first 800 chars only) ===
 {excerpt}
 
-=== INSTRUCTIONS ===
+=== OUTPUT INSTRUCTIONS ===
 Respond ONLY with a valid JSON object — no markdown, no backticks, no explanation.
-{language_instruction}
+Remember: {language_instruction}
 Use this exact structure:
 {{
   "domain": "{domain}",
   "severity": "low|medium|high|critical",
-  "summary": "3-5 sentence summary a non-lawyer can understand (in the required language)",
+  "summary": "3-5 sentence summary",
   "risks": [
-    {{ "title": "Risk title (in the required language)", "description": "Plain explanation (in the required language)", "severity": "low|medium|high|critical", "clause": "Relevant excerpt if available (in the required language)" }}
+    {{ "title": "risk title", "description": "plain explanation", "severity": "low|medium|high|critical", "clause": "relevant excerpt or null" }}
   ],
   "obligations": [
-    {{ "party": "Who is obligated (in the required language)", "action": "What they must do (in the required language)", "deadline": "When if specified or null" }}
+    {{ "party": "who is obligated", "action": "what they must do", "deadline": "when or null" }}
   ],
   "improvements": [
-    {{ "issue": "Problem found (in the required language)", "suggestion": "Recommended fix (in the required language)", "priority": "low|medium|high" }}
+    {{ "issue": "problem found", "suggestion": "recommended fix", "priority": "low|medium|high" }}
   ],
-  "keyTerms": ["important term 1 (in the required language)", "important term 2 (in the required language)"],
-  "verdict": "One sentence overall assessment (in the required language)"
+  "keyTerms": ["term1", "term2"],
+  "verdict": "one sentence overall assessment"
 }}"""
 
 
