@@ -30,6 +30,7 @@ export const translations = {
     deadline: "Deadline",
     priority: "Priority",
     clause: "Clause",
+    langChanged: "Language changed. Please re-analyze your document to see results in English.",
     riskLabel: "RISK",
     severityLabels: {
       low: "LOW",
@@ -67,6 +68,7 @@ export const translations = {
     deadline: "آخری تاریخ",
     priority: "ترجیح",
     clause: "شق",
+    langChanged: "زبان تبدیل ہو گئی۔ اردو میں نتائج دیکھنے کے لیے دستاویز دوبارہ تجزیہ کریں۔",
     riskLabel: "خطرہ",
     severityLabels: {
       low: "کم",
